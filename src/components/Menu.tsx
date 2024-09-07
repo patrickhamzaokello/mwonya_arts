@@ -21,7 +21,7 @@ const menuItems = [
       {
         icon: "/lesson.png",
         label: "Uploads",
-        href: "/list/lessons",
+        href: "/upload",
         visible: ["admin", "teacher"],
       },
       
