@@ -1,10 +1,11 @@
 'use client'
 
-import { Header } from '@/components/auth/header'
-import { Social } from '@/components/auth/social'
-import { BackButton } from '@/components/auth/back-button'
-import { Card, CardFooter, CardHeader } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card'
+import { Header } from '@/components/auth/Header'
+import { Social } from '@/components/auth/Social'
+import { BackButton } from '@/components/auth/Back-Button'
 
+// interface
 interface CardWrapperProps {
   children: React.ReactNode
   headerTitle: string
@@ -15,25 +16,25 @@ interface CardWrapperProps {
 
 export const CardWrapper = ({
   children,
-  headerTitle,
+  showSocial,
   backButtonLabel,
   backButtonHref,
-  showSocial
+  headerTitle
 }: CardWrapperProps) => {
   return (
-    <Card className="mx-auto w-full max-w-sm bg-secondary/90 border border-foreground/5 rounded-lg px-7">
+    <Card className="mx-auto max-w-xl border bg-base100 border-baseContent rounded-xl">
       <CardHeader>
         <Header title={headerTitle} />
       </CardHeader>
 
-      <div>{children}</div>
+      <CardContent>{children}</CardContent>
 
+      {/* If showSocial display it */}
       {showSocial && (
-        <div>
+        <CardFooter className="flex items-center justify-center">
           <Social />
-        </div>
+        </CardFooter>
       )}
-
       <CardFooter>
         <BackButton label={backButtonLabel} href={backButtonHref} />
       </CardFooter>

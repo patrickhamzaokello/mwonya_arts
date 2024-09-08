@@ -1,19 +1,35 @@
 'use client'
 
-import {Button} from '@/components/ui/button'
-import {FaGithub, FaGoogle} from 'react-icons/fa';
+import { Button } from '@/components/ui/button'
+import { signIn } from 'next-auth/react'
+import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
+import { IconBrandGoogle, IconBrandGithub } from '@tabler/icons-react'
 
 export const Social = () => {
-    return (
-        <div className='flex flex-col gap-2 mt-3'>
-            <Button className='rounded-[5px] w-full border border-primary/20 bg-secondary text-primary hover:bg-primary/10 text-md'>
-                <FaGoogle  className='mr-2'/>
-                Google
-            </Button>
-            <Button className='rounded-[5px] w-full border border-primary/20 bg-secondary text-primary hover:bg-primary/10 text-md'>
-                <FaGithub  className='mr-2'/>
-                Github
-            </Button>
-        </div>
-    )
+  const onClick = (provider: 'google' | 'github') => {
+    signIn(provider, {
+      callbackUrl: DEFAULT_LOGIN_REDIRECT
+    })
+  }
+  return (
+    <div className="flex gap-2">
+      <Button
+        size="lg"
+        className="bg-base100 rounded-[5px] border-baseContent border-2 text-md text-baseContent"
+        variant="outline"
+        onClick={() => onClick('google')}
+      >
+        <IconBrandGoogle className="mr-2" /> Google
+      </Button>
+
+      <Button
+        size="lg"
+        className="bg-base100 rounded-[5px] border-baseContent border-2 text-md text-baseContent"
+        variant="outline"
+        onClick={() => onClick('github')}
+      >
+        <IconBrandGithub className="mr-2" /> <span>Github</span>
+      </Button>
+    </div>
+  )
 }

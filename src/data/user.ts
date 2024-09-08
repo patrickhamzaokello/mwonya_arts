@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import bcrypt from 'bcrypt';
 
 // Get Email
 export const getUserByEmail = async (email:string) => {
@@ -7,6 +8,16 @@ export const getUserByEmail = async (email:string) => {
         return user;
     } catch {
         return null;
+    }
+}
+
+export const comparePassword = async (password: string, hash: string) => {
+    try {
+        // Use bcrypt or a similar library to compare hashed passwords
+        const isMatch = await bcrypt.compare(password, hash);
+        return isMatch;
+    } catch {
+        return false;
     }
 }
 

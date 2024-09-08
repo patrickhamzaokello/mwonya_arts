@@ -1,7 +1,7 @@
 // Actions must be use server
 "use server"
 import * as z from "zod";
-import { RegisterSchema } from "@/schemas";
+import { RegisterSchema } from "../schemas";
 import bcrypt from "bcrypt";
 import { db } from "@/lib/db";
 import { getUserByEmail } from "@/data/user";
