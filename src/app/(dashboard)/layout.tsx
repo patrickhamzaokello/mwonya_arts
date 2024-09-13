@@ -1,13 +1,20 @@
 import  Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import Menu from "@/components/Menu"
 import Navbar  from "@/components/Navbar";
- 
-export default function DashboardLayout({
+import { auth, signIn, signOut } from '@/auth';
+
+export default async function DashboardLayout({
     children,
   }: Readonly<{
     children: React.ReactNode;
   }>) {
+    const session = await auth();
+    //redirect if session is null
+    if (!session) {
+      redirect("/auth/login");
+    }
     return   <div className="h-screen flex">
        {/* Left */}
       <div className="w-[14%] md:w-[8%] lg:w-[16%] xl:w-[14%] p-4" >
@@ -17,11 +24,11 @@ export default function DashboardLayout({
         <Image src="/logo.png" alt="logo" width={32} height={32} />
         <span className="hidden lg:block">Mwonya A&R</span>
         </Link>
-        <Menu />
+        <Menu/>
       </div>
       {/* Right */}
       <div className="w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] bg-[#F7F8FA] px-4">
-      <Navbar/>
+      <Navbar session={session}/>
         {children}
       </div>
       

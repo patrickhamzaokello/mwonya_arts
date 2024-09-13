@@ -13,7 +13,6 @@ import bcrypt from "bcryptjs"
 
 // auth
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  debug: true,
   adapter: PrismaAdapter(db) as any,
   secret: process.env.AUTH_SECRET,
   session: {
@@ -21,23 +20,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     maxAge: 30 * 24 * 60 * 60, // 30 days (this is in seconds)
   },
   providers: [
-    Github({
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-      allowDangerousEmailAccountLinking: true
-    }),
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-      allowDangerousEmailAccountLinking: true
-
-    }),
+    Github,
+    Google,
     Credentials({
+      name: "Credentials",
       credentials: {
-        email: {},
-        password: {},
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
-      authorize: async (credentials) => {
+      async authorize (credentials) {
         try {
           // Validate the credentials given by the user
           const validatedFields = await LoginSchema.safeParse(credentials)

@@ -4,7 +4,7 @@ import { FileUp } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 
 
-const Navbar = () => {
+const Navbar = ({ session }: any) => {
     return (
         <div className='flex items-center justify-between py-4'>
             <div className="hidden md:flex items-center gap-2 text-xs rounded-full ring-[1.5px] ring-gray-300 px-2">
@@ -14,7 +14,7 @@ const Navbar = () => {
             </div>
             <div className="flex items-center gap-6 justify-end w-full">
                 <div>
-                <Link className={buttonVariants({ variant: "outline" })} href={"/upload"}> <FileUp className="mr-2 h-4 w-4" />Upload</Link>
+                    <Link className={buttonVariants({ variant: "outline" })} href={"/upload"}> <FileUp className="mr-2 h-4 w-4" />Upload</Link>
 
                 </div>
                 <div className="bg-white rounded-full w-7 h-7 flex items-center justify-center cursor-pointer">
@@ -23,14 +23,40 @@ const Navbar = () => {
                 </div>
                 <div className="bg-white rounded-full w-7 h-7 flex items-center justify-center cursor-pointer relative">
                     <Image src="/announcement.png" alt="" width={20} height={20} />
-                    <div className="absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full text-xs">1</div> 
+                    <div className="absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full text-xs">1</div>
 
                 </div>
-                <div className="flex flex-col">
-                    <span className="text-xs leading-3 font-medium">Patrick Okello</span>
-                    <span className="text-[10px] text-gray-500 text-right">Record Label</span>
-                </div>
-                <Image src="/avatar.png" alt="" width={36} height={36} className="rounded-full"/>
+
+                {
+                    session?.user ? (
+                        <>
+                            <div className="flex flex-col">
+                                <span className="text-xs leading-3 font-medium">{session.user.name}</span>
+                                <span className="text-[10px] text-gray-500 text-right">Record Label</span>
+                            </div>
+                            {
+                                session.user.name && session.user.image &&
+
+                                <Image className="rounded-full"
+                                    src={session.user.image}
+                                    alt={session.user.name}
+                                    width={36}
+                                    height={36}
+                                />
+                            }
+
+                        </>
+                    ) : (
+                        <>
+                            <div className="flex flex-col">
+                                <span className="text-xs leading-3 font-medium">User</span>
+                                <span className="text-[10px] text-gray-500 text-right">Role</span>
+                            </div>
+                            <Image src="/avatar.png" alt="" width={36} height={36} className="rounded-full" />
+                        </>
+                    )
+                }
+
             </div>
         </div>
     )

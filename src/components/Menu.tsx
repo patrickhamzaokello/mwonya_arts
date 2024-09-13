@@ -1,6 +1,6 @@
 import Link from "next/link";
-import  Image from "next/image";
-
+import Image from "next/image";
+import { signOut } from "@/auth";
 const menuItems = [
   {
     title: "MENU",
@@ -17,17 +17,17 @@ const menuItems = [
         href: "/list/results",
         visible: ["admin", "teacher", "student", "parent"],
       },
-  
+
       {
         icon: "/lesson.png",
         label: "Uploads",
         href: "/upload",
         visible: ["admin", "teacher"],
       },
-      
- 
-  
-   
+
+
+
+
       {
         icon: "/calendar.png",
         label: "Events",
@@ -74,26 +74,48 @@ const menuItems = [
   },
 ];
 
+
+function LogoutItem({ item }: { item: any }) {
+  return (
+    <form
+      action={async () => {
+        'use server';
+        await signOut({ redirectTo: '/auth/login' });
+      }}
+    >
+      <button type="submit"
+        className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2 w-full"
+      >
+        <Image src={item.icon} alt="" width={20} height={20} />
+        <span className="hidden lg:block">{item.label}</span>
+      </button>
+    </form>
+  );
+}
+
 const Menu = () => {
   return (
-  <div className="flex flex-col mt-4 text-sm h-[90%] justify-between">
-
-    {menuItems.map(
-      i => (
+    <div className="flex flex-col mt-4 text-sm h-[90%] justify-between">
+      {menuItems.map((i) => (
         <div className="flex flex-col gap-2" key={i.title}>
           <span className="hidden lg:block text-gray-400 font-light my-4">{i.title}</span>
-          {i.items.map (
-            item => (
-              <Link href={item.href} key={item.label}  className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2">
+          {i.items.map((item) =>
+            item.label === "Logout" ? (
+              <LogoutItem key={item.label} item={item} />
+            ) : (
+              <Link
+                href={item.href}
+                key={item.label}
+                className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2"
+              >
                 <Image src={item.icon} alt="" width={20} height={20} />
                 <span className="hidden lg:block">{item.label}</span>
               </Link>
             )
           )}
         </div>
-      )
-    )}
-  </div>)
+      ))}
+    </div>)
 }
 
 export default Menu

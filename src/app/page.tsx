@@ -1,9 +1,27 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { auth, signIn, signOut } from '@/auth';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Card, CardContent } from "@/components/ui/card"
 import { MusicIcon, Share2Icon, TrendingUpIcon, HeadphonesIcon, PlayCircleIcon } from "lucide-react"
 
-export default function LandingPage() {
+function SignOut() {
+  return (
+    <form
+      action={async () => {
+        'use server';
+        await signOut({ redirectTo: '/auth/login' });
+      }}
+    >
+      <Button type="submit" variant="outline" size="sm" className="bg-purple-600 border border-grey-100 hover:border-slate-400">
+        Log out
+      </Button>
+    </form>
+  );
+}
+export default async function LandingPage() {
+  const session = await auth();
   return (
     <div className="flex flex-col min-h-screen bg-[#272727] text-gray-100">
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#272727]/90 backdrop-blur-sm border-b border-gray-800">
@@ -15,9 +33,29 @@ export default function LandingPage() {
           <nav className="flex items-center space-x-4">
             <a href="#features" className="text-sm hover:text-gray-300">Features</a>
             <a href="#testimonials" className="text-sm hover:text-gray-300">Testimonials</a>
-            <Button variant="outline" size="sm" className="bg-purple-600 border border-grey-100 hover:border-slate-400">
-              Log in
-            </Button>
+
+            {
+              session?.user ? (
+                <div className="flex items-center space-x-2">
+                  {
+                    session.user.name && session.user.image &&
+                    <Image className="rounded-full"
+                      src={session.user.image}
+                      alt={session.user.name}
+                      width={32}
+                      height={32}
+                    />
+                  }
+                  <SignOut />
+                </div>
+              ) : (
+                <Link href="/api/auth/signin">
+                  <Button variant="outline" size="sm" className="bg-purple-600 border border-grey-100 hover:border-slate-400">
+                    Log in
+                  </Button>
+                </Link>
+              )
+            }
           </nav>
         </div>
       </header>
@@ -31,13 +69,13 @@ export default function LandingPage() {
             <div className="max-w-2xl">
               <h1 className="text-6xl font-bold mb-6">Your sound is unique, Your success should be too.</h1>
               <p className="text-xl mb-8">
-              Upload your tracks, mixes, and podcasts to reach listeners everywhere. Watch your fanbase grow, track your impact, and turn your passion into income—all on one simple platform.
+                Upload your tracks, mixes, and podcasts to reach listeners everywhere. Watch your fanbase grow, track your impact, and turn your passion into income—all on one simple platform.
               </p>
-             
+
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-                <Input 
-                  type="email" 
-                  placeholder="Enter your email" 
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
                   className="max-w-xs bg-gray-800 text-gray-100 border-gray-700"
                 />
                 <Button className="bg-yellow-500 text-[#272727] hover:bg-gray-300">

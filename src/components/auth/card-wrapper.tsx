@@ -2,7 +2,6 @@
 
 import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card'
 import { Header } from '@/components/auth/Header'
-import { Social } from '@/components/auth/Social'
 import { BackButton } from '@/components/auth/Back-Button'
 
 // interface
@@ -29,12 +28,6 @@ export const CardWrapper = ({
 
       <CardContent>{children}</CardContent>
 
-      {/* If showSocial display it */}
-      {showSocial && (
-        <CardFooter className="flex items-center justify-center">
-          <Social />
-        </CardFooter>
-      )}
       <CardFooter>
         <BackButton label={backButtonLabel} href={backButtonHref} />
       </CardFooter>
