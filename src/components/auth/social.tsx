@@ -1,15 +1,17 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { signIn } from 'next-auth/react'
+import { signIn } from '@/auth'
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
 import { IconBrandGoogle, IconBrandGithub } from '@tabler/icons-react'
 
 export const Social = () => {
   const onClick = (provider: 'google' | 'github') => {
-    signIn(provider, {
-      callbackUrl: DEFAULT_LOGIN_REDIRECT
-    })
+    try {
+      signIn(provider, {redirectTo: DEFAULT_LOGIN_REDIRECT});
+    } catch (error) {
+      throw error;
+    }
   }
   return (
     <div className="flex gap-2">
