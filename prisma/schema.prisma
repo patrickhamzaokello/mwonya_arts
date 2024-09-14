@@ -29,6 +29,7 @@ model User {
   role          UserRole  @default(USER)
   accounts      Account[]
   createdAt     DateTime  @default(now())
+  mediaUploads  MediaUpload[] // Add this line
 }
 
 // Account Model
@@ -70,3 +71,29 @@ model PasswordResetToken {
 
   @@unique([email, token])
 }
+
+enum MediaUploadType {
+  image
+  video
+  audio
+}
+
+// Media Upload Table
+model MediaUpload {
+  id      String   @id @default(cuid())
+  type    MediaUploadType  @default(image)
+  userId  String
+  fileUrl String
+  createdAt DateTime  @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mediaDescriptions  MediaDescription[] 
+} 
+
+// Album Table
+model MediaDescription {
+  id      String   @id @default(cuid())
+  content String
+  mediaId String
+  createdAt DateTime  @default(now())
+  media MediaUpload @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+} 

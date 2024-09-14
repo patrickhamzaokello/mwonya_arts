@@ -17,6 +17,18 @@ const menuItems = [
         href: "/list/results",
         visible: ["admin", "teacher", "student", "parent"],
       },
+      {
+        icon: "/result.png",
+        label: "Album",
+        href: "/album",
+        visible: ["admin", "teacher", "student", "parent"],
+      },
+      {
+        icon: "/result.png",
+        label: "Revenue",
+        href: "/revenue",
+        visible: ["admin", "teacher", "student", "parent"],
+      },
 
       {
         icon: "/lesson.png",

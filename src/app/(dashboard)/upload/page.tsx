@@ -4,7 +4,9 @@ import { useState } from "react"
 import { twMerge } from "tailwind-merge"
 import AudioWaveformPlayer from "@/components/AudioWaveformPlayer";
 
-import { getSignedURL } from "./actions";
+
+
+import { getSignedURL, createMediaDescription } from "./actions";
 
 const UploadPage = () => {
 
@@ -46,8 +48,8 @@ const UploadPage = () => {
                     throw new Error(signedURLResult.failure)
                 }
         
-                const url = signedURLResult.success.url
-                console.log({url})
+                const {url, mediaId} = signedURLResult.success
+        
         
                 await fetch(url, {
                     method: "PUT",
@@ -56,6 +58,10 @@ const UploadPage = () => {
                         "Content-Type": file.type,
                     },
                 })
+                console.log({mediaId})
+
+                // create album
+                await createMediaDescription({content, mediaId})
             }
         } catch (error) {
             setStatusMessage("Failed")
