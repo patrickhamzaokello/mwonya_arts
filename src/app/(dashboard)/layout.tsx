@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import Menu from "@/components/Menu"
 import Navbar  from "@/components/Navbar";
-import { auth, signIn, signOut } from '@/auth';
+import { auth } from '@/auth';
 
 export default async function DashboardLayout({
     children,

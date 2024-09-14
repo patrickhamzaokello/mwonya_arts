@@ -18,6 +18,14 @@ const UploadPage = () => {
 
     const buttonDisabled = content.length < 1 || loading
 
+    const computeSHA256 = async (file: File) => {
+        const arrayBuffer = await file.arrayBuffer()
+        const hashBuffer = await crypto.subtle.digest("SHA-256", arrayBuffer)
+        const hashArray = Array.from(new Uint8Array(hashBuffer))
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("")
+        return hashHex
+    }
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
@@ -27,14 +35,33 @@ const UploadPage = () => {
         // do all the image upload and everything
         console.log({ content, file })
 
-        const signedURLResult = await getSignedURL()
-        if(signedURLResult.failure !== undefined) {
-            setStatusMessage("Failed to get signed URL")
+        try {
+            if(file){
+                setStatusMessage("Uploading file")
+                const checksum = await computeSHA256(file)
+                const signedURLResult = await getSignedURL(file.type, file.size, checksum)
+    
+                if(signedURLResult.failure !== undefined) {
+                    setStatusMessage("Failed")
+                    throw new Error(signedURLResult.failure)
+                }
+        
+                const url = signedURLResult.success.url
+                console.log({url})
+        
+                await fetch(url, {
+                    method: "PUT",
+                    body: file,
+                    headers: {
+                        "Content-Type": file.type,
+                    },
+                })
+            }
+        } catch (error) {
+            setStatusMessage("Failed")
+        } finally {
             setLoading(false)
-            return
         }
-
-        const url = signedURLResult.success.url
 
         setStatusMessage("Created")
         setLoading(false)
@@ -56,6 +83,7 @@ const UploadPage = () => {
             setFileUrl(undefined)
         }
     }
+
 
 
     return (
