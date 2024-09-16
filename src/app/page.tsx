@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from "@/components/ui/card"
 import { MusicIcon, Share2Icon, TrendingUpIcon, HeadphonesIcon, PlayCircleIcon } from "lucide-react"
+import { redirect } from "next/navigation";
 
 function SignOut() {
   return (
@@ -22,6 +23,10 @@ function SignOut() {
 }
 export default async function LandingPage() {
   const session = await auth();
+
+  if (session) {
+    redirect("/studio");
+  }
   return (
     <div className="flex flex-col min-h-screen bg-[#272727] text-gray-100">
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#272727]/90 backdrop-blur-sm border-b border-gray-800">

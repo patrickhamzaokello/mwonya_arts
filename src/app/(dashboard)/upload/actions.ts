@@ -113,6 +113,6 @@ export async function createMediaDescription({ content, mediaId }: CreateAlbumAr
         },
     });
 
-    revalidatePath("/admin")
-    redirect("/admin")
+    revalidatePath("/uploadList")
+    redirect("/uploadList")
 }

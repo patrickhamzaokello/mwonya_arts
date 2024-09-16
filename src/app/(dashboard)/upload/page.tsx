@@ -38,19 +38,19 @@ const UploadPage = () => {
         console.log({ content, file })
 
         try {
-            if(file){
+            if (file) {
                 setStatusMessage("Uploading file")
                 const checksum = await computeSHA256(file)
                 const signedURLResult = await getSignedURL(file.type, file.size, checksum)
-    
-                if(signedURLResult.failure !== undefined) {
+
+                if (signedURLResult.failure !== undefined) {
                     setStatusMessage("Failed")
                     throw new Error(signedURLResult.failure)
                 }
-        
-                const {url, mediaId} = signedURLResult.success
-        
-        
+
+                const { url, mediaId } = signedURLResult.success
+
+
                 await fetch(url, {
                     method: "PUT",
                     body: file,
@@ -58,10 +58,10 @@ const UploadPage = () => {
                         "Content-Type": file.type,
                     },
                 })
-                console.log({mediaId})
+                console.log({ mediaId })
 
                 // create album
-                await createMediaDescription({content, mediaId})
+                await createMediaDescription({ content, mediaId })
             }
         } catch (error) {
             setStatusMessage("Failed")
@@ -120,12 +120,16 @@ const UploadPage = () => {
                                 <img className="object-cover" src={fileUrl} alt={file.name} />
                             </div>
                         ) : file.type.startsWith("audio/") ? (
-                            <AudioWaveformPlayer fileUrl={fileUrl} />
-                        ): file.type.startsWith("video/") ? (
                             <div className="rounded-lg overflow-hidden w-32 h-32 relative">
-                            <video className="object-cover" src={fileUrl} autoPlay muted loop />
-                        </div>
-                        )  : (
+                                <AudioWaveformPlayer fileUrl={fileUrl} />
+                                <audio className="object-cover" src={fileUrl} controls />
+                            </div>
+
+                        ) : file.type.startsWith("video/") ? (
+                            <div className="rounded-lg overflow-hidden w-32 h-32 relative">
+                                <video className="object-cover" src={fileUrl} autoPlay muted loop />
+                            </div>
+                        ) : (
                             <div className="rounded-lg overflow-hidden w-32 h-32 relative">
                                 <audio className="object-cover" src={fileUrl} controls />
                             </div>
