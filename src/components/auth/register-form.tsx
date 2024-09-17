@@ -16,10 +16,11 @@ import { RegisterSchema } from '@/schemas'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { register } from '@/actions/register'
-import { socialBTN } from '@/actions/OAuth'
+
 import { useState, useTransition } from 'react'
 import { toast } from 'react-hot-toast'
-import { IconBrandGoogle, IconBrandGithub } from '@tabler/icons-react'
+
+import { SocialProviders } from './SocialProviders'
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition()
@@ -127,27 +128,7 @@ export const RegisterForm = () => {
           </Button>
         </form>
       </Form>
-      <CardFooter className="mt-6 p-0 flex items-center justify-center">
-        <div className="flex gap-2">
-          <Button
-            size="lg"
-            className="bg-base100 rounded-[5px] border-baseContent border-2 text-md text-baseContent"
-            variant="outline"
-            onClick={() => socialBTN('google')}
-          >
-            <IconBrandGoogle className="mr-2" /> Googles
-          </Button>
-
-          <Button
-            size="lg"
-            className="bg-base100 rounded-[5px] border-baseContent border-2 text-md text-baseContent"
-            variant="outline"
-            onClick={() => socialBTN('github')}
-          >
-            <IconBrandGithub className="mr-2" /> <span>Github</span>
-          </Button>
-        </div>
-      </CardFooter>
+      <SocialProviders />
     </CardWrapper>
   )
 }

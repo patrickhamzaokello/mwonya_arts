@@ -1,9 +1,8 @@
 "use client"
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter,usePathname  } from "next/navigation";
-import LogoutItem from "@/components/LogoutItem";
-
+import { useRouter, usePathname } from "next/navigation";
+import { logout } from '@/actions/logout'
 const menuItems = [
   {
     title: "MENU",
@@ -94,7 +93,7 @@ const menuItems = [
 
 export default function Menu() {
   const currentPath = usePathname();
-  
+
   return (
     <div className="flex flex-col mt-4 text-sm h-[90%] justify-between">
       {menuItems.map((i) => (
@@ -103,12 +102,19 @@ export default function Menu() {
           {i.items.map((item) => {
             const isActive = currentPath === item.href;
             return item.label === "Logout" ? (
-              <LogoutItem key={item.label} item={item} />
+              <button onClick={() => {
+                logout();
+              }}
+                className="flex items-center hover:bg-accent hover:text-accent-foreground justify-center px-2 rounded-sm lg:justify-start gap-4 text-gray-500 py-2 w-full"
+              >
+                <Image src={item.icon} alt="" width={20} height={20} />
+                <span className="hidden lg:block">{item.label}</span>
+              </button>
             ) : (
               <Link
                 href={item.href}
                 key={item.label}
-                className={`flex items-center justify-center lg:justify-start gap-4 py-2 ${isActive ? 'text-blue-500' : 'text-gray-500'}`}
+                className={`flex items-center hover:bg-accent hover:text-accent-foreground justify-center px-2 rounded-sm lg:justify-start gap-4 py-2 ${isActive ? 'text-accent-foreground border border-input bg-background' : 'text-gray-500'}`}
               >
                 <Image src={item.icon} alt="" width={20} height={20} />
                 <span className="hidden lg:block">{item.label}</span>
