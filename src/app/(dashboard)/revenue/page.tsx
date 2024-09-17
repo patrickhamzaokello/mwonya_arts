@@ -10,10 +10,12 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
+import { useArtist } from "@/contexts/ArtistContext";
 
 const AudioUploadForm = () => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
+  const [selectedArtist, setSelectedArtist] = useArtist();
 
   const onDrop = useCallback((acceptedFiles) => {
     const uploadedFile = acceptedFiles[0];
@@ -73,6 +75,7 @@ const AudioUploadForm = () => {
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Upload Audio</h2>
             <p className="text-muted-foreground">Audio file upload.</p>
+            <h2>Selected Artist: {selectedArtist || 'None'}</h2>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

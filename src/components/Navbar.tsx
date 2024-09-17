@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FileUp, ChevronDown, Plus } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useArtist } from "@/contexts/ArtistContext"
 
 import { useRouter } from 'next/navigation'
 
@@ -17,7 +18,7 @@ interface Artist {
 
 const Navbar = ({ session }: any) => {
     const [artists, setArtists] = useState<Artist[]>([]);
-    const [selectedArtist, setSelectedArtist] = useState<string | null>(null);
+    const [selectedArtist, setSelectedArtist] = useArtist();
     const [isOpen, setIsOpen] = useState(false);
     const router = useRouter()
     useEffect(() => {
