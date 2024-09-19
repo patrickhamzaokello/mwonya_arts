@@ -3,30 +3,30 @@ import Plunk from '@plunk/node';
 import LinkEmail from "@/components/email/verify-email";
 import { render } from "@react-email/render";
 
-
-const resend  = new Plunk(process.env.EMAIL_SERVER_PASSWORD);
-
+const email_secret = process.env.EMAIL_SERVER_PASSWORD;
+const plunk  = new Plunk(email_secret);
+const base_url = `http://localhost:3000/`;
 // Send a verification email to the user
 export const sendVerificationEmail = async (
     email: string,
     token: string
 ) => {
-    const confirmLink = `https://nizzyabi.com/auth/new-verification?token=${token}`;
+    const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
+   
 
-    const emailHtml = LinkEmail({ token: token });
-    const body = render(emailHtml)
+    const emailHtml = await render(LinkEmail({token}));
 
-    await resend.emails.send({
+    await plunk.emails.send({
         from: "info@mwonya.com",
         to: email,
-        subject: "Confirm your email",
-        body: body,
+        subject: "Confirm your email on Mwonya",
+        body: emailHtml,
     })
 
-    resend.contacts.create({
-        email: email,
-        audience_id: 'ed288a7a-23ef-4f32-a2f1-3dc887da7a1c'
-    })
+    // plunk.contacts.create({
+    //     email: email,
+    //     audience_id: 'ed288a7a-23ef-4f32-a2f1-3dc887da7a1c'
+    // })
 
     
 }
@@ -35,15 +35,15 @@ export const sendPasswordResetEmail = async (
     email: string,
     token: string,
 ) => {
-    const resetLink = `https://nizzyabi.com/auth/new-password?token=${token}`;
-    const body =render(ResetPassword({ token }))
+    const resetLink = `http://localhost:3000/auth/new-password?token=${token}`;
+    const emailHtml = await render(ResetPassword({token}))
 
 
-    await resend.emails.send({
+    await plunk.emails.send({
         from: "Nizar <noreply@nizzyabi.com>",
         to: email,
         subject: "Reset your password",
-        body,
+        body:emailHtml,
     })
 
 }

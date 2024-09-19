@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/button'
 import { register } from '@/actions/register'
 
 import { useState, useTransition } from 'react'
-import { toast } from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast';
 
 import { SocialProviders } from './SocialProviders'
 
@@ -55,6 +55,7 @@ export const RegisterForm = () => {
       backButtonLabel="Already have an account?"
       backButtonHref="/auth/login"
     >
+        <Toaster />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">

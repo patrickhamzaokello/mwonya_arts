@@ -77,7 +77,7 @@ const Navbar = ({ session }: any) => {
             </div>
             <div className="flex items-center gap-6 justify-end w-full">
                 <div>
-                    <Link className={buttonVariants({ variant: "outline" })} href={"/upload"}> <FileUp className="mr-2 h-4 w-4" />Upload</Link>
+                    <Link className={buttonVariants({ variant: "outline" })} href={"/upload"}> <FileUp className="mr-2 h-4 w-4" />New Release</Link>
                 </div>
                 <div className="bg-white rounded-full w-7 h-7 flex items-center justify-center cursor-pointer">
                     <Image src="/message.png" alt="" width={20} height={20} />

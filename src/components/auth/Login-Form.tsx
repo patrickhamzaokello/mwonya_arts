@@ -19,7 +19,7 @@ import { login } from '@/actions/login'
 import { useEffect, useRef, useTransition } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import toast from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast';
 import { SocialProviders } from './SocialProviders'
 
 
@@ -48,6 +48,7 @@ export const LoginForm = () => {
   })
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+
     startTransition(() => {
       login(values).then((data) => {
         if (data?.error) {
@@ -69,6 +70,7 @@ export const LoginForm = () => {
       backButtonHref="/auth/register"
       showSocial
     >
+      <Toaster />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
