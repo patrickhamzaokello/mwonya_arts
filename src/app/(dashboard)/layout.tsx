@@ -36,7 +36,7 @@ export default async function DashboardLayout({
           </div>
 
           {/* Main Content Section */}
-          <div className="flex-1 overflow-y-auto mt-[60px] p-4">
+          <div className="flex-1 overflow-y-auto mt-[60px] px-4 py-6">
             {/* Main dashboard section to scroll */}
             {children}
           </div>

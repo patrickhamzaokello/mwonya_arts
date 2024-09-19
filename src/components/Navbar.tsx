@@ -53,7 +53,7 @@ const Navbar = ({ session }: any) => {
         <div className='flex items-center justify-between py-4 px-4 bg-white'>
             <div className="relative">
                 <Select onValueChange={handleSelectArtist} value={selectedArtist || undefined}>
-                    <SelectTrigger className="w-[200px]">
+                    <SelectTrigger className="w-[200px] text-bold">
                         <SelectValue placeholder="Select Artist" />
                     </SelectTrigger>
                     <SelectContent>
@@ -66,8 +66,8 @@ const Navbar = ({ session }: any) => {
                             </div>
 
                         ))}
-                        <SelectItem value="add-new" className="mt-2 border-1 pt-2">
-                            <span className="flex items-center text-blue-500">
+                        <SelectItem value="add-new" className="mt-2 text-bold border-1 pt-2">
+                            <span className="flex items-center text-purple-500">
                                 <Plus className="mr-2 h-4 w-4" />
                                 Add New Artist
                             </span>
