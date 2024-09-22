@@ -80,7 +80,7 @@ const DashboardLayout = () => {
                 {/* Empty space for future content (2/3 width) */}
                 <div className="w-2/3 bg-white-100 rounded-lg">
                     {/* This div is empty and takes up 2/3 of the page width */}
-                    <ArtistPerformanceChart currentMonth="Sep" />
+                    <ArtistPerformanceChart />
                 </div>
             </div>
         </div>

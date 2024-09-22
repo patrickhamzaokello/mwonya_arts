@@ -6,7 +6,7 @@ import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
 import { generateVerificationToken } from "@/lib/tokens";
-import { comparePassword, getUserByEmail } from "@/data/user";
+import { comparePassword, getUserByEmail } from "@/data_layer/user";
 import { sendVerificationEmail } from "@/lib/mail";
 
 

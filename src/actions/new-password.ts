@@ -1,8 +1,8 @@
 'use server'
 import * as z from 'zod';
 import { NewPasswordSchema } from '../schemas';
-import { getPasswordResetTokenByToken } from '@/data/password-reset-token';
-import { getUserByEmail } from '@/data/user';
+import { getPasswordResetTokenByToken } from '@/data_layer/password-reset-token';
+import { getUserByEmail } from '@/data_layer/user';
 import bcrypt from 'bcrypt';
 import { db } from '@/lib/db';
 

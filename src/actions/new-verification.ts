@@ -1,9 +1,9 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { getUserByEmail } from "@/data/user";
+import { getUserByEmail } from "@/data_layer/user";
 
-import { getVerificationTokenByToken } from "@/data/verification-token";
+import { getVerificationTokenByToken } from "@/data_layer/verification-token";
 
 export const newVerification = async (token:string) => {
 

@@ -1,6 +1,6 @@
 'use server'
 import * as z from 'zod';
-import { getUserByEmail } from "@/data/user"
+import { getUserByEmail } from "@/data_layer/user"
 import { ResetSchema } from "../schemas"
 import { sendPasswordResetEmail } from '@/lib/mail';
 import { generatePasswordResetToken } from '@/lib/tokens';
