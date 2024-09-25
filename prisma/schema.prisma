@@ -51,7 +51,8 @@ model User {
   updatedAt       DateTime @updatedAt
   mediaUploads  MediaUpload[] // Add this line
   notifications Notification[]
-  recordLabels RecordLabel[]
+  recordLabel   RecordLabel? @relation(fields: [recordLabelId], references: [id])
+  recordLabelId String?
   artists Artist[]
 }
 
@@ -325,8 +326,7 @@ model RecordLabel {
   city          String?
   state         String?
   country       String
-  userId        String?
-  user          User? @relation(fields: [userId], references: [id])
+  users         User[]
   artists       Artist[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt

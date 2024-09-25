@@ -16,24 +16,38 @@ interface Artist {
     image: string;
 }
 
-const Navbar = ({ session }: any) => {
+const Navbar = ({ session, userRole }: any) => {
     const [artists, setArtists] = useState<Artist[]>([]);
     const [selectedArtist, setSelectedArtist] = useArtist();
     const [isOpen, setIsOpen] = useState(false);
+    const [role, setUserRole] = useState("");
     const router = useRouter()
+
     useEffect(() => {
+        const fetchUserRole = async () => {
+        
+            if (userRole) {
+                setUserRole(userRole);
+            } else {
+                setUserRole("dinna");  
+            }
+        };
+        const fetchArtists = async () => {
+            try {
+                const response = await fetch('/api/artists'); // Replace with your actual API endpoint
+                const data = await response.json();
+                setArtists(data);
+            } catch (error) {
+                console.error('Error fetching artists:', error);
+            }
+        };
+
+        fetchUserRole();
         fetchArtists();
     }, []);
 
-    const fetchArtists = async () => {
-        try {
-            const response = await fetch('/api/artists'); // Replace with your actual API endpoint
-            const data = await response.json();
-            setArtists(data);
-        } catch (error) {
-            console.error('Error fetching artists:', error);
-        }
-    };
+
+    
 
     const handleSelectArtist = (artistId: string) => {
         setSelectedArtist(artistId);
@@ -91,7 +105,7 @@ const Navbar = ({ session }: any) => {
                     <>
                         <div className="flex flex-col">
                             <span className="text-xs leading-3 font-medium">{session.user.name}</span>
-                            <span className="text-[10px] text-gray-500 text-right">Record Label</span>
+                            <span className="text-[10px] text-gray-500 text-right">{role}</span>
                         </div>
                         {session.user.name && session.user.image && (
                             <Image className="rounded-full"

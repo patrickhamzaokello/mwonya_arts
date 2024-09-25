@@ -12,3 +12,19 @@ export const getArtistsForaLabelbyLabelID = async (recordlableID: string) => {
         return null;
     }
 }
+
+// return artist profile where userId is matching
+export const getArtistProfileByUserId = async (userId: string) => {
+    try {
+        const artistProfile = await db.artist.findUnique({
+            where: { userId: userId }
+        });
+
+        return artistProfile;
+    } catch {
+        return null;
+    }
+}
+
+
+

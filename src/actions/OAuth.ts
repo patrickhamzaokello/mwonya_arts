@@ -1,6 +1,6 @@
 "use server"
 import { signIn } from "@/auth";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { DEFAULT_LOGIN_REDIRECT } from "@/lib/routes";
 
 export const socialBTN = async (provider: 'google' | 'github') => {
     try {

@@ -29,3 +29,18 @@ export const getVerificationTokenByEmail = async (
         return null
     }
 }
+
+
+export const getDeleteExpiredTokens = async ()=>{
+    try {
+        const deleteToken = await db.verificationToken.deleteMany({
+            where: {
+                expires: {
+                    lt: new Date()
+                }
+            }
+        });
+    } catch (error) {
+        return null
+    }
+}

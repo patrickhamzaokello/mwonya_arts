@@ -5,17 +5,21 @@ import Menu from "@/components/Menu"
 import Navbar from "@/components/Navbar";
 import { auth, signOut } from '@/auth';
 import { ArtistProvider } from "@/contexts/ArtistContext";
+import { getUserById } from '@/data_layer/user';
 
 export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   const session = await auth();
+
   //redirect if session is null
   if (!session) {
     redirect("/auth/login");
   }
+  const user = await getUserById(session?.user.id);
   return (
     <ArtistProvider>
       <div className="h-screen flex">
@@ -32,7 +36,7 @@ export default async function DashboardLayout({
         <div className="ml-[14%] md:ml-[8%] lg:ml-[16%] xl:ml-[14%] w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] h-screen flex flex-col bg-[#F7F8FA]">
           {/* Top Navbar */}
           <div className="fixed top-0 left-0 right-0 h-[60px] z-20 bg-white  ml-[14%] md:ml-[8%] lg:ml-[16%] xl:ml-[14%]">
-            <Navbar session={session} />
+            <Navbar session={session} userRole={user?.role} />
           </div>
 
           {/* Main Content Section */}

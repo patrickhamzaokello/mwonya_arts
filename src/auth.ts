@@ -10,6 +10,7 @@ import Google from "next-auth/providers/google"
 import { getUserByEmail } from "@/data_layer/user"
 import { LoginSchema } from "@/schemas"
 import bcrypt from "bcryptjs"
+import { getDeleteExpiredTokens } from "@/data_layer/verification-token"
 
 // auth
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -105,11 +106,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async jwt({ token }) {
       if (!token.sub) return token;
-
+      await getDeleteExpiredTokens()
       const exisitingUser = await getUserById(token.sub);
 
       if (!exisitingUser) return token;
-
+      
       token.role = exisitingUser.role;
       return token;
     },

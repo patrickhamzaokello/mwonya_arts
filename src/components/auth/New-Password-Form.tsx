@@ -19,7 +19,7 @@ import { FormError } from "@/components/Form-Error";
 import { FormSuccess } from "@/components/Form-Success";
 import { useState, useTransition } from "react";
 import { newPassword } from "@/actions/new-password";
-import toast from "react-hot-toast";
+import toast, { Toaster } from 'react-hot-toast';
 
 export const NewPasswordForm = () => {
     const searchParams = useSearchParams();
@@ -54,6 +54,7 @@ export const NewPasswordForm = () => {
             backButtonHref="/auth/login"
             backButtonLabel="Back to login"
         >
+            <Toaster />
             <Form {...form}>
                 <form 
                     onSubmit={form.handleSubmit(onSubmit)}

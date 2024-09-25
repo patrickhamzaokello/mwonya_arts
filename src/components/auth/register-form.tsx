@@ -22,8 +22,12 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import { SocialProviders } from './SocialProviders'
 
+import { useRouter } from 'next/navigation'
+
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition()
+const router = useRouter()
+
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -43,6 +47,7 @@ export const RegisterForm = () => {
         if (data?.success) {
           toast.success(data.success)
           form.reset({ email: '', password: '', name: '' })
+          router.push("/confirm-email")
         }
       })
     })
@@ -67,7 +72,7 @@ export const RegisterForm = () => {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Tyler Durden"
+                      placeholder="Kasfa"
                       {...field}
                       disabled={isPending}
                       type="name"
@@ -87,7 +92,7 @@ export const RegisterForm = () => {
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="tylerdurden@gmail.com"
+                      placeholder="kasfa@gmail.com"
                       disabled={isPending}
                       type="email"
                       className="bg-base100 border-baseContent/20 text-baseContent"

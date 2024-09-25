@@ -21,10 +21,12 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import toast, { Toaster } from 'react-hot-toast';
 import { SocialProviders } from './SocialProviders'
-
+import { useRouter } from 'next/navigation'
 
 export const LoginForm = () => {
   const searchParams = useSearchParams()
+  const router = useRouter()
+
   const urlError =
     searchParams.get('error') === 'OAuthAccountNotLinked'
       ? 'Email already in use with different provider!'
@@ -55,9 +57,13 @@ export const LoginForm = () => {
           toast.error(data.error)
         }
         if (data?.success) {
-          toast.success(data.success)
-          form.reset({ email: '', password: '' })
-          window.location.href = '/'
+          if(data?.message_type == "verify_email"){
+            router.push("/confirm-email")
+          } else {
+            toast.success(data.success)
+            form.reset({ email: '', password: '' })
+            router.push("/studio")
+          }
         }
       })
     })
@@ -86,7 +92,7 @@ export const LoginForm = () => {
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="tylerdurden@gmail.com"
+                      placeholder="pk@gmail.com"
                       disabled={isPending}
                       type="email"
                       className="bg-base100 border-baseContent/20 text-baseContent"

@@ -23,6 +23,7 @@ export const sendVerificationEmail = async (
         body: emailHtml,
     })
 
+
     // plunk.contacts.create({
     //     email: email,
     //     audience_id: 'ed288a7a-23ef-4f32-a2f1-3dc887da7a1c'
@@ -40,7 +41,7 @@ export const sendPasswordResetEmail = async (
 
 
     await plunk.emails.send({
-        from: "Nizar <noreply@nizzyabi.com>",
+        from: "info@mwonya.com",
         to: email,
         subject: "Reset your password",
         body:emailHtml,

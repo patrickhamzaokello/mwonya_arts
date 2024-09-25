@@ -17,7 +17,7 @@ const VerificationEmail = ({ token }) => {
   const main = {
     backgroundColor: "#f6f9fc",
     fontFamily:
-      '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
   };
 
   const container = {
@@ -75,7 +75,7 @@ const VerificationEmail = ({ token }) => {
         <Container style={container}>
           <div style={box}>
             <Img
-            src="/"
+            src="/mwonya_logo.png"
               width="100"
               height="40"
               alt="Mwonya Logo"
@@ -88,8 +88,6 @@ const VerificationEmail = ({ token }) => {
               button below:
             </Text>
             <Button
-              pX={10}
-              pY={10}
               style={button}
               href={`http://localhost:3000/auth/new-verification?token=${token}`}
             >

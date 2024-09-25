@@ -3,7 +3,7 @@ import * as z from 'zod';
 import { NewPasswordSchema } from '../schemas';
 import { getPasswordResetTokenByToken } from '@/data_layer/password-reset-token';
 import { getUserByEmail } from '@/data_layer/user';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { db } from '@/lib/db';
 
 export const newPassword = async (

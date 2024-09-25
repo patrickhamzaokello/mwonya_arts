@@ -21,12 +21,26 @@ export const comparePassword = async (password: string, hash: string) => {
     }
 }
 
-// Get Id
+// Get User Id
 export const getUserById = async (id:string) => {
     try {
         const user = await db.user.findUnique({ where: { id }});
         return user;
     } catch {
+        return null;
+    }
+}
+
+export const updateUserProfile = async (userId: string, data: any) => {
+    try {
+        const updatedArtistProfile = await db.user.update({
+            where: { id: userId },
+            data: data
+        });
+
+        return updatedArtistProfile;
+    } catch (error) {
+        console.error("Error updating user profile:", error);
         return null;
     }
 }
