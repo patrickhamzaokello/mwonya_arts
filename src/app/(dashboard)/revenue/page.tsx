@@ -40,9 +40,6 @@ const AudioUploadForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (file) {
-      // Here you would typically send the file to your server
-      console.log('Submitting file:', file);
-      // Reset the form after submission
       setFile(null);
     }
   };

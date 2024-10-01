@@ -34,7 +34,7 @@ const AudioWaveformPlayer: React.FC<AudioWaveformPlayerProps> = ({ fileUrl }) =>
           try {
             wavesurfer.current.destroy();
           } catch (error) {
-            console.error("Error during WaveSurfer destroy:", error);
+            throw(error)
           }
         }
       };

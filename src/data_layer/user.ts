@@ -40,7 +40,6 @@ export const updateUserProfile = async (userId: string, data: any) => {
 
         return updatedArtistProfile;
     } catch (error) {
-        console.error("Error updating user profile:", error);
         return null;
     }
 }

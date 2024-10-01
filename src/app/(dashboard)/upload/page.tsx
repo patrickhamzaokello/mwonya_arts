@@ -34,8 +34,6 @@ const UploadPage = () => {
         setStatusMessage("Creating")
         setLoading(true)
 
-        // do all the image upload and everything
-        console.log({ content, file })
 
         try {
             if (file) {
@@ -58,7 +56,6 @@ const UploadPage = () => {
                         "Content-Type": file.type,
                     },
                 })
-                console.log({ mediaId })
 
                 // create album
                 await createMediaDescription({ content, mediaId })

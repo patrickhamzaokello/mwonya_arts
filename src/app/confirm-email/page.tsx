@@ -17,7 +17,7 @@ export default function SignupConfirmation() {
   }, []);
 
   const handleResendEmail = () => {
-    console.log('Resending email to:', email);
+    // console.log('Resending email to:', email);
   };
 
   return (

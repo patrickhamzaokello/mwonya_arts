@@ -38,7 +38,7 @@ const Navbar = ({ session, userRole }: any) => {
                 const data = await response.json();
                 setArtists(data);
             } catch (error) {
-                console.error('Error fetching artists:', error);
+                throw(error)
             }
         };
 

@@ -6,6 +6,8 @@ import Navbar from "@/components/Navbar";
 import { auth, signOut } from '@/auth';
 import { ArtistProvider } from "@/contexts/ArtistContext";
 import { getUserById } from '@/data_layer/user';
+import { loginRoleChecks } from '@/actions/loginRoleCheck';
+
 
 export default async function DashboardLayout({
   children,
@@ -19,7 +21,12 @@ export default async function DashboardLayout({
   if (!session) {
     redirect("/auth/login");
   }
-  const user = await getUserById(session?.user.id);
+  const roleCheckResult = await loginRoleChecks(session.user.id);
+  if(roleCheckResult.profileStatus.needsProfileCreation){
+    redirect("/create_profile");
+  }
+
+  const user = await getUserById(session.user.id);
   return (
     <ArtistProvider>
       <div className="h-screen flex">
