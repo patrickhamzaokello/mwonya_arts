@@ -23,7 +23,7 @@ export default auth(async (req) => {
      return Response.redirect(new URL(ROOT, nextUrl));
    
     if (isArtistRoute) {
-       const roleCheckResult = await loginRoleChecks(req.auth);
+       const roleCheckResult = await loginRoleChecks(req.auth?.user.id);
        if (!roleCheckResult.profileStatus.hasArtistProfile) {
            return Response.redirect(new URL(ROOT, nextUrl));
        }
