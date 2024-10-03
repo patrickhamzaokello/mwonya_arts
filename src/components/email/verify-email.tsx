@@ -41,7 +41,7 @@ const VerificationEmail = ({ token }) => {
     color: "#525f7f",
     fontSize: "16px",
     lineHeight: "24px",
-    textAlign: "left",
+    textAlign: "left" as const,
   };
 
   const anchor = {
@@ -55,7 +55,7 @@ const VerificationEmail = ({ token }) => {
     fontSize: "16px",
     fontWeight: "bold",
     textDecoration: "none",
-    textAlign: "center",
+    textAlign: "center" as const,
     display: "block",
     width: "100%",
     padding: "10px",

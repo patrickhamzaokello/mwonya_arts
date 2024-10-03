@@ -47,7 +47,7 @@ const ResetPassword = ({
     color: "#525f7f",
     fontSize: "16px",
     lineHeight: "24px",
-    textAlign: "left"
+    textAlign: "left" as const
   };
 
   const anchor = {
