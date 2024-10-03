@@ -52,7 +52,7 @@ export async function getSignedURL(fileType: string, fileSize: number, checksum:
         ContentLength: fileSize,
         ChecksumSHA256: checksum,
         Metadata: {
-            userId: session.user.id,
+            userId: session.user.id ?? "null",
         }
     })
 
@@ -65,7 +65,7 @@ export async function getSignedURL(fileType: string, fileSize: number, checksum:
         data: {
             fileUrl: signedURL.split("?")[0],
             type: fileType.startsWith("image") ? "image" : fileType.startsWith("video") ? "video" : "audio",
-            userId: session.user.id,
+            userId: session.user.id ?? "null",
         }
     })
 
