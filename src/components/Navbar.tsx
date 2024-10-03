@@ -64,7 +64,7 @@ const Navbar = ({ session, userRole }: any) => {
 
 
     return (
-        <div className='flex items-center justify-between py-4 px-4 bg-white'>
+        <div className='flex items-center justify-between py-4 px-4 bg-[#000] border-b-2 border-zinc-600'>
             <div className="relative">
                 <Select onValueChange={handleSelectArtist} value={selectedArtist || undefined}>
                     <SelectTrigger className="w-[200px] text-bold">
