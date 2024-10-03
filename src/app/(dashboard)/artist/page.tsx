@@ -86,8 +86,8 @@ const ArtistPage = () => {
       registerArtist(formData).then((data) => {
         if (data?.error) {
           toast({
-            title: "Warning",
-            description: "errro"+ data.error?? "Error Occurred",
+            title: "Error",
+            description: "Error Occurred",
           });
         }
         if (data?.success) {
