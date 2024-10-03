@@ -4,7 +4,13 @@ import Link from 'next/link';
 import ArtistPerformanceChart from './ArtistPerformanceChart';
 import Image from "next/image";
 
-const MetricCard = ({ icon: Icon, label, value }) => (
+interface MetricCardProps {
+    icon: React.ComponentType<{ className?: string }>;
+    label: string;
+    value: string | number;
+}
+
+const MetricCard: React.FC<MetricCardProps> = ({ icon: Icon, label, value }) => (
     <div className="relative border border-transparent bg-white shadow-sm rounded-lg p-6 overflow-hidden group transition-all duration-300 hover:shadow-lg hover:border-purple-500">
         <div className="flex items-center justify-between mb-4">
             {/* Icon with a rounded background */}
