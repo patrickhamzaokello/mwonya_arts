@@ -70,7 +70,7 @@ export const ResetForm = () => {
                                             placeholder="kasfa@gmail.com"
                                             disabled={isPending}
                                             type='email'
-                                            className="bg-base100 border-baseContent/20 text-baseContent"
+                                            className="border-baseContent/20 text-baseContent"
                                         />
                                     </FormControl>
                                     <FormMessage className="text-red-500" />

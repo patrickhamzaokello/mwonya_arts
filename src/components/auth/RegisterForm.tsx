@@ -76,7 +76,7 @@ const router = useRouter()
                       {...field}
                       disabled={isPending}
                       type="name"
-                      className="bg-base100 border-baseContent/20 text-baseContent"
+                      className=" border-baseContent/20 text-baseContent"
                     />
                   </FormControl>
                   <FormMessage className="text-red-500" />
@@ -95,7 +95,7 @@ const router = useRouter()
                       placeholder="kasfa@gmail.com"
                       disabled={isPending}
                       type="email"
-                      className="bg-base100 border-baseContent/20 text-baseContent"
+                      className=" border-baseContent/20 text-baseContent"
                     />
                   </FormControl>
                   <FormMessage className="text-red-500" />
@@ -114,7 +114,7 @@ const router = useRouter()
                       {...field}
                       disabled={isPending}
                       type="password"
-                      className="bg-base100 border-baseContent/20 text-baseContent"
+                      className=" border-baseContent/20 text-baseContent"
                     />
                   </FormControl>
                   <FormMessage className="text-red-500" />

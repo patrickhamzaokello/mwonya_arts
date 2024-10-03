@@ -14,9 +14,9 @@ const menuItems = [
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
-        icon: "/result.png",
-        label: "Analytics",
-        href: "/analytics",
+        icon: "/artist.png",
+        label: "Artists",
+        href: "/artist",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
@@ -85,9 +85,9 @@ export default function Menu() {
   const currentPath = usePathname();
 
   return (
-    <div className="flex flex-col mt-4 text-sm h-[90%] justify-between">
+    <div className="dark flex flex-col mt-4 text-sm h-[90%] justify-between">
       {menuItems.map((i) => (
-        <div className="flex flex-col gap-2 text-medium" key={i.title}>
+        <div className="flex flex-col gap-2 text-bold" key={i.title}>
           <span className="hidden lg:block text-gray-400 font-light  my-4">{i.title}</span>
           {i.items.map((item) => {
             const isActive = currentPath === item.href;
@@ -104,7 +104,7 @@ export default function Menu() {
               <Link
                 href={item.href}
                 key={item.label}
-                className={`flex text-slate-700 items-center hover:bg-accent hover:text-accent-foreground justify-center px-2 rounded-sm lg:justify-start  gap-4 py-2 ${isActive ? 'text-accent-foreground bg-[#541FE7]' : 'text-gray-500'}`}
+                className={`flex items-center hover:bg-[#6519fb]  hover:text-white justify-center px-2 rounded-sm lg:justify-start  gap-4 py-2 ${isActive ? 'text-white bg-[#6519fb]' : 'text-[#a2a5ab]'}`}
               >
                 <Image src={item.icon} alt="" width={20} height={20} />
                 <span className="hidden lg:block">{item.label}</span>

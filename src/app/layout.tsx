@@ -2,8 +2,46 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster"
 import "./globals.css";
+import { cn } from '@/lib/utils'
+import localFont from 'next/font/local'
 
-const montserrat = Montserrat({ subsets: ["latin"] });
+const myFont = localFont({
+    src: [
+        {
+            path: './ui/fonts/fonnts.com-DegularDemo-Light.otf',
+
+            weight: '300', // Lighter weight for paragraphs
+            style: 'normal',
+        },
+        {
+            path: './ui/fonts/fonnts.com-DegularDemo-Regular.otf',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+
+            path: './ui/fonts/fonnts.com-DegularDemo-Medium.otf',
+
+            weight: '500', // Medium weight for subheadings
+
+            style: 'normal',
+
+        },
+
+        {
+            path: './ui/fonts/fonnts.com-DegularDemo-Bold.otf',
+            weight: '700', // Bold weight for headings
+            style: 'normal',
+        },
+        {
+
+            path: './ui/fonts/fonnts.com-DegularDemo-Black.otf',
+            weight: '900', // Heaviest weight for emphasis
+            style: 'normal',
+
+        },
+    ],
+})
 
 export const metadata: Metadata = {
   title: "Mwonya Artist",
@@ -17,7 +55,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
+      <body className={cn(myFont.className, 'bg-[#101010] text-[#fff]')}>
         <main className="h-full">{children}</main>
         <Toaster />
       </body>

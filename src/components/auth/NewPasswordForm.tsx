@@ -73,7 +73,7 @@ export const NewPasswordForm = () => {
                                             placeholder="••••••••"
                                             disabled={isPending}
                                             type='password'
-                                            className="bg-base100 border-baseContent/20 text-baseContent"
+                                            className="border-baseContent/20 text-baseContent"
                                         />
                                     </FormControl>
                                     <FormMessage className="text-red-500" />
