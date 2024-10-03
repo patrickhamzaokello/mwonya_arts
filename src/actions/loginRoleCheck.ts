@@ -2,7 +2,7 @@ import { getUserById, updateUserProfile } from '@/data_layer/user';
 import { UserRole } from '@prisma/client';
 import { getArtistProfileByUserId } from '@/data_layer/artist';
 
-export const loginRoleChecks = async (userid?: string) => {
+export const loginRoleChecks = async (userid:string) => {
 
     let profileStatus = {
         hasArtistProfile: false,
