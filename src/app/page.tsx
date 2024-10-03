@@ -7,26 +7,16 @@ import { Card, CardContent } from "@/components/ui/card"
 import { MusicIcon, Share2Icon, TrendingUpIcon, HeadphonesIcon, PlayCircleIcon } from "lucide-react"
 import { redirect } from "next/navigation";
 
-function SignOut() {
-  return (
-    <form
-      action={async () => {
-        'use server';
-        await signOut({ redirectTo: '/auth/login' });
-      }}
-    >
-      <Button type="submit" variant="outline" size="sm" className="bg-purple-600 border border-grey-100 hover:border-slate-400">
-        Log out
-      </Button>
-    </form>
-  );
-}
+
 export default async function LandingPage() {
   const session = await auth();
+
 
   if (session) {
     redirect("/studio");
   }
+
+  const user = session.user
   return (
     <div className="flex flex-col min-h-screen bg-[#272727] text-gray-100">
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#272727]/90 backdrop-blur-sm border-b border-gray-800">
@@ -40,18 +30,17 @@ export default async function LandingPage() {
             <a href="#testimonials" className="text-sm hover:text-gray-300">Testimonials</a>
 
             {
-              session?.user ? (
+              user ? (
                 <div className="flex items-center space-x-2">
                   {
-                    session.user.name && session.user.image &&
+                      user.name && user.image &&
                     <Image className="rounded-full"
-                      src={session.user.image}
-                      alt={session.user.name}
+                      src={user.image}
+                      alt={user.name}
                       width={32}
                       height={32}
                     />
                   }
-                  <SignOut />
                 </div>
               ) : (
                 <Link href="/api/auth/signin">
