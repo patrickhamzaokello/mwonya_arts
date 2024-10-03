@@ -14,7 +14,7 @@ import { useArtist } from "@/contexts/ArtistContext";
 
 const AudioUploadForm = () => {
   const [file, setFile] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [selectedArtist, setSelectedArtist] = useArtist();
 
   const onDrop = useCallback((acceptedFiles: any[]) => {
@@ -29,8 +29,7 @@ const AudioUploadForm = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: 'audio/*',
-    multiple: false
+    accept: 'audio/*',    multiple: false
   });
 
   const removeFile = () => {
