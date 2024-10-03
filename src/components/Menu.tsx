@@ -104,7 +104,7 @@ export default function Menu() {
               <Link
                 href={item.href}
                 key={item.label}
-                className={`flex text-slate-700 items-center hover:bg-accent hover:text-accent-foreground justify-center px-2 rounded-sm lg:justify-start  gap-4 py-2 ${isActive ? 'text-accent-foreground border border-input bg-background' : 'text-gray-500'}`}
+                className={`flex text-slate-700 items-center hover:bg-accent hover:text-accent-foreground justify-center px-2 rounded-sm lg:justify-start  gap-4 py-2 ${isActive ? 'text-accent-foreground bg-[#541FE7]' : 'text-gray-500'}`}
               >
                 <Image src={item.icon} alt="" width={20} height={20} />
                 <span className="hidden lg:block">{item.label}</span>

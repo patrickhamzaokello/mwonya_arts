@@ -31,7 +31,7 @@ export default async function DashboardLayout({
     <ArtistProvider>
       <div className="h-screen flex">
         {/* Left Sidebar */}
-        <div className="w-[14%] md:w-[8%] lg:w-[16%] xl:w-[14%] h-screen p-4 fixed top-0 left-0 overflow-y-auto bg-[#000] z-10">
+        <div className="w-[14%] md:w-[8%] lg:w-[16%] xl:w-[14%] h-screen p-4 fixed top-0 left-0 overflow-y-auto bg-[#101010] z-10">
           <Link href="/" className="flex items-center justify-center lg:justify-start gap-2">
             <Image src="/logo.png" alt="logo" width={32} height={32} />
             <span className="hidden lg:block">Mwonya A&R</span>
@@ -40,7 +40,7 @@ export default async function DashboardLayout({
         </div>
 
         {/* Right Section */}
-        <div className="ml-[14%] md:ml-[8%] lg:ml-[16%] xl:ml-[14%] w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] h-screen flex flex-col bg-[#000]">
+        <div className="ml-[14%] md:ml-[8%] lg:ml-[16%] xl:ml-[14%] w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] h-screen flex flex-col bg-[#111111]">
           {/* Top Navbar */}
           <div className="fixed top-0 left-0 right-0 h-[60px] z-20 bg-[#000]  ml-[14%] md:ml-[8%] lg:ml-[16%] xl:ml-[14%]">
             <Navbar session={session} userRole={user?.role} />
