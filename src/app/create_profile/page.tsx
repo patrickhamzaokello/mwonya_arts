@@ -5,10 +5,11 @@
  */
 "use client"
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { useRouter } from 'next/navigation'
-import Image  from "next/image"
+import { JSX, SVGProps, useState} from "react"
+import {Button} from "@/components/ui/button"
+import {useRouter} from 'next/navigation'
+import Image from "next/image"
+
 export default function Component() {
   const router = useRouter()
   const [selectedCard, setSelectedCard] = useState("artist")
@@ -20,49 +21,49 @@ export default function Component() {
     }
   }
   return (
-    <div className="w-full max-w-4xl mx-auto py-12 md:py-16 lg:py-20 bg-white">
-      <div className="flex flex-col items-center justify-center h-screen gap-8 bg-white">
-      <div className="text-center space-y-2">
-        <Image className="m-8 mx-auto" src="/mwonya_logo.png" width="50" height="50" alt="Mwonya" />
-        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Choose Your Path</h1>
-        <p className="max-w-[600px] text-muted-foreground md:text-xl">
-          Select your role to continue and experience our sleek and modern platform.
-        </p>
-      </div>
-      <div>
-      <div className="flex flex-row gap-4">
-        <div
-          className={`px-8 py-8 rounded-lg cursor-pointer transition-all duration-300 flex flex-col items-center justify-center gap-2 ${
-            selectedCard === "artist"
-              ? "border-2 border-primary bg-primary-foreground text-primary"
-              : "border bg-background hover:bg-accent hover:text-accent-foreground"
-          }`}
-          onClick={() => setSelectedCard("artist")}
-        >
-          <MicIcon className="w-8 h-8" />
-          <span className="text-sm font-medium">Create New Artist</span>
-        </div>
-        <div
-          className={`px-8 py-8 rounded-lg cursor-pointer transition-all duration-300 flex flex-col items-center justify-center gap-2 ${
-            selectedCard === "label"
-              ? "border-2 border-primary  bg-primary-foreground text-primary"
-              : "border bg-background hover:bg-accent hover:text-accent-foreground"
-          }`}
-          onClick={() => setSelectedCard("label")}
-        >
-          <DiscIcon className="w-8 h-8" />
-          <span className="text-sm font-medium">Create New Record Label</span>
-        </div>
-      </div>
-      <Button className="mt-12 w-full" onClick={handleContinue}>Continue</Button>
+      <div className="w-full max-w-4xl mx-auto py-12 md:py-16 lg:py-20 bg-white">
+        <div className="flex flex-col items-center justify-center h-screen gap-8 bg-white">
+          <div className="text-center space-y-2">
+            <Image className="m-8 mx-auto" src="/mwonya_logo.png" width="50" height="50" alt="Mwonya"/>
+            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Choose Your Path</h1>
+            <p className="max-w-[600px] text-muted-foreground md:text-xl">
+              Select your role to continue and experience our sleek and modern platform.
+            </p>
+          </div>
+          <div>
+            <div className="flex flex-row gap-4">
+              <div
+                  className={`px-8 py-8 rounded-lg cursor-pointer transition-all duration-300 flex flex-col items-center justify-center gap-2 ${
+                      selectedCard === "artist"
+                          ? "border-2 border-primary bg-primary-foreground text-primary"
+                          : "border bg-background hover:bg-accent hover:text-accent-foreground"
+                  }`}
+                  onClick={() => setSelectedCard("artist")}
+              >
+                <MicIcon className="w-8 h-8"/>
+                <span className="text-sm font-medium">Create New Artist</span>
+              </div>
+              <div
+                  className={`px-8 py-8 rounded-lg cursor-pointer transition-all duration-300 flex flex-col items-center justify-center gap-2 ${
+                      selectedCard === "label"
+                          ? "border-2 border-primary  bg-primary-foreground text-primary"
+                          : "border bg-background hover:bg-accent hover:text-accent-foreground"
+                  }`}
+                  onClick={() => setSelectedCard("label")}
+              >
+                <DiscIcon className="w-8 h-8"/>
+                <span className="text-sm font-medium">Create New Record Label</span>
+              </div>
+            </div>
+            <Button className="mt-12 w-full" onClick={handleContinue}>Continue</Button>
 
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
   )
 }
 
-function DiscIcon(props) {
+function DiscIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -83,7 +84,7 @@ function DiscIcon(props) {
 }
 
 
-function MicIcon(props) {
+function MicIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
