@@ -23,12 +23,13 @@ export default async function DashboardLayout({
   if (!session) {
     redirect("/auth/login");
   }
-  const roleCheckResult = await loginRoleChecks(session.user.id);
+  const userId = session.user.id ?? "null";
+  const roleCheckResult = await loginRoleChecks(userId);
   if(roleCheckResult.profileStatus.needsProfileCreation){
     redirect("/create_profile");
   }
 
-  const user = await getUserById(session.user.id);
+  const user = await getUserById(userId);
   return (
     <ArtistProvider>
       <div className='flex text-[#f1f1f1]'>

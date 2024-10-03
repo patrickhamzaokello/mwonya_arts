@@ -39,8 +39,6 @@ const ArtistPage = () => {
     defaultValues: {
       name: "",
       biography: "",
-      profileImage: null,
-      coverImage: null,
       isIndependent: true,
       labelId: "",
     },
@@ -63,7 +61,7 @@ const ArtistPage = () => {
 
       reader.onloadend = () => {
         setPreview(reader.result as string);
-        setValue("image", file); // manually set the image in the form state
+        setValue("profileImage", file); // manually set the image in the form state
       };
 
       reader.readAsDataURL(file);
@@ -86,16 +84,15 @@ const ArtistPage = () => {
       formData.append("coverImage", values.coverImage as File);
 
       registerArtist(formData).then((data) => {
-        console.log(data)
         if (data?.error) {
           toast({
             title: "Warning",
-            description: data.error,
+            description: "errro"+ data.error?? "Error Occurred",
           });
         }
         if (data?.success) {
           toast({
-            title: data.success,
+            title: data.success.message,
             description: "The artist has been successfully added to the database.",
           });
           form.reset({

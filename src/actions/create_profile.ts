@@ -11,7 +11,7 @@ export const transformZodErrors = (error: z.ZodError) => {
         message: issue.message,
     }));
 };
-export const registerArtist = async (formData: FormData) => {
+export const  registerArtist = async (formData: FormData) => {
     try {
 
         //validate the FormData
