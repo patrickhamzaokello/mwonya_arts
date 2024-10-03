@@ -107,10 +107,6 @@ export const registerNewRecordLable = async (formData: FormData) => {
         const createRecordLabel = await CreateNewRecordLabel(session?.user.id,name, contactEmail, contactPhone, website, address, city, state, country);
 
 
-        if (createRecordLabel.failure !== undefined) {
-            throw new Error(createRecordLabel.failure)
-        }
-
         const { recordLabelName, recordLabelID } = createRecordLabel.success
 
         return {

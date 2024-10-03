@@ -14,7 +14,7 @@ export const getLabelByName = async (label_name: string) => {
 }
 
 // create new artist
-export const CreateNewRecordLabel = async (userId: string, name: string, contactEmail: string, contactPhone: string, website: string, address: string, city: string, state: string, country: string) => {
+export const CreateNewRecordLabel = async (userId: string | undefined, name: string, contactEmail: string, contactPhone: string| undefined, website: string| undefined, address: string| undefined, city: string| undefined, state: string| undefined, country: string) => {
     const recordLabel = await db.recordLabel.create({
         data: {
             name,

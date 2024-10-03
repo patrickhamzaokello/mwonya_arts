@@ -41,7 +41,7 @@ export const getArtistProfileByName = async (artist_name: string) => {
 
 
 // create new artist
-export const CreateArtistProfile = async (name: string, biography: string, isIndependent:boolean, profileImage:string, coverImage:string, labelId:string) => {
+export const CreateArtistProfile = async (name: string, biography: string| undefined, isIndependent:boolean | undefined, profileImage:string, coverImage:string, labelId:string | undefined) => {
     try {
         const artistProfile = await db.artist.create({
             data: {
