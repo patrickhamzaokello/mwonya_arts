@@ -28,8 +28,7 @@ const AudioUploadForm = () => {
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: 'audio/*',    multiple: false
+    onDrop, multiple: false
   });
 
   const removeFile = () => {
