@@ -39,8 +39,6 @@ export default function Component() {
         defaultValues: {
             name: "",
             biography: "",
-            profileImage: null,
-            coverImage: null,
             isIndependent: true,
             labelId: "",
         },
@@ -63,7 +61,7 @@ export default function Component() {
 
             reader.onloadend = () => {
                 setPreview(reader.result as string);
-                setValue("image", file); // manually set the image in the form state
+                setValue("profileImage", file); // manually set the image in the form state
             };
 
             reader.readAsDataURL(file);
@@ -85,18 +83,17 @@ export default function Component() {
             formData.append("profileImage", values.profileImage as File);
             formData.append("coverImage", values.coverImage as File);
 
-            registerArtist(formData).then((data) => {
-               console.log(data)
-                if (data?.error) {
+            registerArtist(formData).then((data: MessageType) => {
+                if (data.status === "error") {
                     toast({
-                        title: "Warning",
-                        description: data.error,
+                        title: "Error",
+                        description: data.message,
                     });
                 }
-                if (data?.success) {
+                if (data.status === "success") {
                     toast({
-                        title: data.success,
-                        description: "The artist has been successfully added to the database.",
+                        title: "success",
+                        description: data.message,
                     });
                     form.reset({
                         name: '', biography: '', profileImage: undefined, coverImage: undefined,

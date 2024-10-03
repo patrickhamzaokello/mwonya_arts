@@ -72,7 +72,7 @@ export default function CreateNewRecordLabel() {
         if (data?.error) {
           toast({
             title: "Warning",
-            description: data.error,
+            description: "error with the data",
           });
         }
         if (data?.success) {

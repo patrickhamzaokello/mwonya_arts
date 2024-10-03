@@ -83,17 +83,17 @@ const ArtistPage = () => {
       formData.append("profileImage", values.profileImage as File);
       formData.append("coverImage", values.coverImage as File);
 
-      registerArtist(formData).then((data) => {
-        if (data?.error) {
+      registerArtist(formData).then((data: MessageType) => {
+        if (data.status === "error") {
           toast({
             title: "Error",
-            description: "Error Occurred",
+            description: data.message,
           });
         }
-        if (data?.success) {
+        if (data.status === "success") {
           toast({
-            title: data.success.message,
-            description: "The artist has been successfully added to the database.",
+            title: "success",
+            description: data.message,
           });
           form.reset({
             name: '', biography: '', profileImage: undefined, coverImage: undefined,

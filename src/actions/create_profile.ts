@@ -11,7 +11,7 @@ export const transformZodErrors = (error: z.ZodError) => {
         message: issue.message,
     }));
 };
-export const  registerArtist = async (formData: FormData) => {
+export const  registerArtist = async (formData: FormData): Promise<MessageType>  => {
     try {
 
         //validate the FormData
@@ -33,22 +33,22 @@ export const  registerArtist = async (formData: FormData) => {
 
         // display text if email is taken
         if (exisitingName) {
-            return { error: "Name already taken 😞" }
+            return { status: "error", message: "Name already taken 😞" };
         }
 
         try {
             const createArtist = await CreateArtistProfile(name, biography, isIndependent, "profileImage", "coverImage", labelId);
 
             if (createArtist) {
-                return { error: "Success" }
+                return { status: "success", message: "Artist profile created successfully" };
             } else {
-                return { error: "FAilure" }
-
+                return { status: "error", message: "Failure" };
             }
 
         } catch (error) {
             return {
-                error: `Error creating artist profile: ${error}`,
+                status: "error",
+                message: `Error creating artist profile: ${error}`,
             };
         }
 
@@ -59,14 +59,9 @@ export const  registerArtist = async (formData: FormData) => {
 
 
     } catch (error) {
-        if (error instanceof z.ZodError) {
-            return {
-                error: transformZodErrors(error),
-            };
-        }
-
         return {
-            error: "An unexpected error occurred. Could not create shelf.",
+            status: "error",
+            message: "An unexpected error occurred. Could not create record label.",
         };
     }
 };
