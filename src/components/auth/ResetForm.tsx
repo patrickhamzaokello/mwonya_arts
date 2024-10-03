@@ -1,6 +1,6 @@
 'use client';
 import * as z from "zod";
-import { CardWrapper } from "@/components/auth/Card-Wrapper"
+import { CardWrapper } from "@/components/auth/CardWrapper"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -14,8 +14,8 @@ import {
 import { ResetSchema } from "@/schemas";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/Form-Error";
-import { FormSuccess } from "@/components/Form-Success";
+import { FormError } from "@/components/FormError";
+import { FormSuccess } from "@/components/FormSuccess";
 import { useState, useTransition } from "react";
 import {reset} from "@/actions/reset";
 import toast from "react-hot-toast";

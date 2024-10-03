@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card'
 import { Header } from '@/components/auth/Header'
-import { BackButton } from '@/components/auth/Back-Button'
+import { BackButton } from '@/components/auth/BackButton'
 
 // interface
 interface CardWrapperProps {

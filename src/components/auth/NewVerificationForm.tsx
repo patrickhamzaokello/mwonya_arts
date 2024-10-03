@@ -1,11 +1,11 @@
 "use client"
 
-import { CardWrapper } from "@/components/auth/Card-Wrapper";
+import { CardWrapper } from "@/components/auth/CardWrapper";
 import { newVerification } from "@/actions/new-verification";
 import { useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react";
-import { FormError } from "@/components/Form-Error";
-import { FormSuccess } from "@/components/Form-Success";
+import { FormError } from "@/components/FormError";
+import { FormSuccess } from "@/components/FormSuccess";
 import { CircularProgress } from "@mui/material"
 
 

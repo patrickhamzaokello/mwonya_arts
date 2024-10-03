@@ -1,8 +1,8 @@
 'use client'
+
 import * as z from 'zod'
-import { CardWrapper } from '@/components/auth/Card-Wrapper'
+import { CardWrapper } from '@/components/auth/CardWrapper'
 import { useForm } from 'react-hook-form'
-import { CardFooter } from '@/components/ui/card'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Form,
@@ -12,42 +12,58 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form'
-import { RegisterSchema } from '@/schemas'
+import { LoginSchema } from '@/schemas'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { register } from '@/actions/register'
-
-import { useState, useTransition } from 'react'
+import { login } from '@/actions/login'
+import { useEffect, useRef, useTransition } from 'react'
+import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import toast, { Toaster } from 'react-hot-toast';
-
 import { SocialProviders } from './SocialProviders'
-
 import { useRouter } from 'next/navigation'
 
-export const RegisterForm = () => {
+export const LoginForm = () => {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+
+  const urlError =
+    searchParams.get('error') === 'OAuthAccountNotLinked'
+      ? 'Email already in use with different provider!'
+      : ''
+
   const [isPending, startTransition] = useTransition()
-const router = useRouter()
+  const hasDisplayedError = useRef(false)
+  useEffect(() => {
+    if (urlError && !hasDisplayedError.current) {
+      toast.error(urlError)
+      hasDisplayedError.current = true
+    }
+  }, [urlError])
 
-
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: '',
-      password: '',
-      name: ''
+      password: ''
     }
   })
 
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+
     startTransition(() => {
-      register(values).then((data) => {
+      login(values).then((data) => {
         if (data?.error) {
           toast.error(data.error)
         }
         if (data?.success) {
-          toast.success(data.success)
-          form.reset({ email: '', password: '', name: '' })
-          router.push("/confirm-email")
+          if(data?.message_type == "verify_email"){
+            router.push("/confirm-email")
+          } else {
+            toast.success(data.success)
+            form.reset({ email: '', password: '' })
+            router.push("/studio")
+          }
         }
       })
     })
@@ -55,34 +71,18 @@ const router = useRouter()
 
   return (
     <CardWrapper
-      headerTitle="Register"
+      headerTitle="Login"
+      backButtonLabel="Don't have an account?"
+      backButtonHref="/auth/register"
       showSocial
-      backButtonLabel="Already have an account?"
-      backButtonHref="/auth/login"
     >
-        <Toaster />
+      <Toaster />
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Kasfa"
-                      {...field}
-                      disabled={isPending}
-                      type="name"
-                      className="bg-base100 border-baseContent/20 text-baseContent"
-                    />
-                  </FormControl>
-                  <FormMessage className="text-red-500" />
-                </FormItem>
-              )}
-            />
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-1 w-full"
+        >
+          <div className="space-y-2">
             <FormField
               control={form.control}
               name="email"
@@ -92,7 +92,7 @@ const router = useRouter()
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="kasfa@gmail.com"
+                      placeholder="pk@gmail.com"
                       disabled={isPending}
                       type="email"
                       className="bg-base100 border-baseContent/20 text-baseContent"
@@ -118,6 +118,14 @@ const router = useRouter()
                     />
                   </FormControl>
                   <FormMessage className="text-red-500" />
+                  <Button
+                    size="sm"
+                    variant="link"
+                    className="px-0 "
+                    type="button"
+                  >
+                    <Link href="/auth/reset">Forgot Password?</Link>
+                  </Button>
                 </FormItem>
               )}
             />
@@ -128,13 +136,16 @@ const router = useRouter()
             type="submit"
             className="p-[3px] bg-transparent relative font-semibold w-full"
           >
+
             <div className="px-8 py-2  w-full rounded-[5px] relative group transition duration-200 text-base100 bg-primary text-lg">
-              Register
+              Login
             </div>
           </Button>
         </form>
       </Form>
+
       <SocialProviders />
+
     </CardWrapper>
   )
 }
