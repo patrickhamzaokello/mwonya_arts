@@ -1,9 +1,14 @@
 import { getUserById, updateUserProfile } from '@/data_layer/user';
-import { UserRole } from '@prisma/client';
 import { getArtistProfileByUserId } from '@/data_layer/artist';
 
-export const loginRoleChecks = async (userid:string) => {
+// Define UserRole enum within the file
+enum UserRole {
+    USER = 'USER',
+    ARTIST = 'ARTIST',
+    LABEL = 'LABEL'
+}
 
+export const loginRoleChecks = async (userid: string) => {
     let profileStatus = {
         hasArtistProfile: false,
         hasLabelProfile: false,
@@ -37,20 +42,16 @@ export const loginRoleChecks = async (userid:string) => {
                     if (user.role === UserRole.USER) {
                         await updateUserProfile(userid, { role: UserRole.LABEL });
                     }
-
-
                 }
-
 
                 // If user has neither artist nor label profile, they need to create one
                 if (!profileStatus.hasArtistProfile && !profileStatus.hasLabelProfile) {
                     profileStatus.needsProfileCreation = true;
                 }
-                
+
                 break;
         }
     }
-
 
     return {
         user: {
